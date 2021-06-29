@@ -1,0 +1,167 @@
+div center {
+    margin : auto;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.room_wrapper div div{
+  margin : auto;
+  font-size: 13px;
+}
+
+.room_wrapper{
+  width: 1400px;
+  height: 500px;
+  border: 5px double black;
+}
+
+.room-in{
+  width: 350px;
+  height: 210px;
+  border-right: 5px double black;
+  border-bottom: 5px double black;
+  display: inline-block;
+  float: left;
+}
+
+.study-room{
+  width: 20%;
+  height: 31vh;
+  border-right: 5px double black;
+  display: inline-block;
+}
+
+.air-shower{
+  width: 120px;
+  height: 100px;
+  border-right: 5px double black;
+  border-bottom: 5px double black;
+  display: inline-grid;
+  float: left;
+}
+
+.clean-room{
+  width: 170px;
+  height: 100%;
+  position: relative;
+  left: -5px;
+  display: inline-grid;
+  border-right: 5px double black;
+  border-left: 5px double black;
+  float:left;
+}
+
+.vr-room-01,.vr-room-02 {
+  width: 170px;
+  height: 150px;
+  position: relative;
+  top: 0;
+  left: -5px;
+  display: inline-grid;
+  border-bottom: 5px double black;
+  border-right: 5px double black;
+  float: left;
+}
+
+.vr-room-03{
+  width: 170px;
+  height: 150px;
+  position: absolute;
+  margin-top: 343px;
+  margin-left: -5px;
+  display: inline-grid;
+  border-top: 5px double black;
+  border-right: 5px double black;
+  float: left;
+}
+
+.vr-room-04{
+  width: 170px;
+  height: 150px;
+  position: absolute;
+  margin-top: 343px;
+  margin-left: 234px;
+  display: inline-grid;
+  border-top: 5px double black;
+  border-right: 5px double black;
+  border-left: 5px double black;
+  float: left;
+}
+
+.control-room{
+  width: 70px;
+  height: 101px;
+  position: absolute;
+  margin-top: 392px;
+  margin-left: 165px;
+  display: inline-grid;
+  border-top: 5px double black;
+  float: left;
+}
+
+.wall{
+  width: 173px;
+  height: 201px;
+  position: absolute;
+  margin-top: 142px;
+  margin-left: -109px;
+  display: inline-grid;
+  border-right: 5px double black;
+  float: left;
+}
+
+.in{
+  width: 140px;
+  height: 100px;
+  position: absolute;
+  margin-top: 104px;
+  margin-left: -350px;
+  display: inline-grid;
+  border-top: 5px double black;
+  border-right: 5px double black;
+  float: left;
+}
+
+.exit{
+  width: 140px;
+  height: 90px;
+  position: relative;
+  top: 0;
+  margin-left: -5px;
+  display: inline-grid;
+  border-bottom: 5px double black;
+  border-right: 5px double black;
+  float: left;
+}
+
+.blank-wrapper{
+  width: 285px;
+  height: 70px;
+  top: 0;
+  display: inline-grid;
+  border-bottom: 5px double black;
+  float: left;
+}
+
+.cpr-room{
+  width: 210px;
+  height: 270px;
+  position: relative;
+  top: 0;
+  margin-left: -5px;
+  display: inline-grid;
+  border-left: 5px double black;
+  border-bottom: 5px double black;
+  float: right;
+}
+
+.fire-area{
+  width: 347px;
+  height: 101px;
+  position: absolute;
+  margin-top: 391px;
+  margin-left: -71px;
+  display: inline-grid;
+  border-top: 5px double black;
+  float: left;
+}

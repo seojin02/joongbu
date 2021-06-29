@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="google-site-verification" content="ILpvXDFNEbSojhXtltn2b9j5gyEUXmqmQKwSyrE58SU" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="Lm6RYxTfOlLlmgJDnGd0xqHfzRFjcK1fUntgXojm">
+
+    <title>
+      비동기 페이징
+    </title>
+
+		<!--Css-->
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+
+    <!--JS-->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chance/1.0.13/chance.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="page.js"></script>
+		<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+		<style tyle="text/css">
+
+		html,
+
+		body {
+
+				margin:0;
+
+				padding:0;
+
+				height:100%;
+
+		}
+
+		#wrapper {
+
+			position:relative;
+
+				min-height:100%;
+
+		}
+
+		#header {
+
+			height:70px;
+
+				background:#ccc;
+
+		}
+
+		#container {
+
+				padding:20px;
+
+		}
+
+		#footer {
+
+				position:absolute;
+
+				bottom:0;
+
+				width:100%;
+
+				height:70px;   
+
+				/*background:#ccc;*/
+
+		}
+
+		</style>
+  </head>
+
+  <body>
+
+		<!-- Always shows a header, even in smaller screens. -->
+		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+			<header class="mdl-layout__header">
+				<div class="mdl-layout__header-row">
+					<!-- Title -->
+					<span class="mdl-layout-title">비동기 페이징</span>
+					<!-- Add spacer, to align navigation to the right -->
+					<div class="mdl-layout-spacer"></div>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+											mdl-textfield--floating-label mdl-textfield--align-right">
+						<label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
+							<i class="material-icons">search</i>
+						</label>
+						<div class="mdl-textfield__expandable-holder">
+							<input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<div class="mdl-layout__drawer">
+				<span class="mdl-layout-title">비동기 페이징</span>
+				<nav class="mdl-navigation">
+					<a class="mdl-navigation__link" href="">1</a>
+					<a class="mdl-navigation__link" href="">2</a>
+					<a class="mdl-navigation__link" href="">3</a>
+					<a class="mdl-navigation__link" href="">4</a>
+				</nav>
+			</div>
+
+			<main class="mdl-layout__content">
+				<div class="page-content">
+					
+					<!-- Your content goes here -->
+
+					<!--col12-->
+					<div class="mdl-cell mdl-cell--12-col">
+						<div style="margin-top:20px;"></div>
+						<!--list -->
+						<div class="font-weight-bold">
+							Total : <span id="reservationCnt">0</span>
+						</div>	
+						<div style="height:400px;overflow:auto;">
+							<table class="table" style="">
+								<thead class="bg-primary">
+									<tr>
+										<th scope="col" style="text-align:center">예약 번호</th>
+										<th scope="col" style="text-align:center">예약 부서</th>
+										<th scope="col" style="text-align:center">예약 담당자</th>
+									</tr>
+								</thead>
+								<tbody id="expResultGrid">
+								</tbody>
+							</table>
+						</div>
+						<!--list end-->						
+					</div>
+					<!--col12 end-->
+
+					<!--col12-->
+					<div class="mdl-cell mdl-cell--12-col footer" id="footer">
+						<!--<div style="margin-top:40px;"></div>-->
+						<!--paging col-->
+						<div class="col-12">
+							<!-- paging -->
+							<nav aria-label="Page navigation example">
+								<ul class="pagination justify-content-center"> 
+									<li class="page-item prev-pagination">
+									<a class="page-link" href="#" aria-label="Previous">
+										<span aria-hidden="true">&laquo;</span>
+										<span class="sr-only">Previous</span>
+									</a>
+									</li>
+									<li class="page-item next-pagination">
+									<a class="page-link" href="#" aria-label="Next">
+										<span aria-hidden="true">&raquo;</span>
+										<span class="sr-only">Next</span>
+									</a>
+									</li>
+								</ul>
+							</nav>
+							<!-- paging end-->
+						</div>
+						<!--paging col end-->
+					</div>
+					<!--col12 end-->
+
+				</div>
+			</main>
+
+		</div>
+
+  </body>
+</html>

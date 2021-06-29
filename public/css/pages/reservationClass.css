@@ -1,0 +1,42 @@
+h5{
+  margin : 0;
+}
+
+.mdl-textfield{
+  padding: 5px 0 !important;
+}
+
+.mdl-data-table td{
+  padding : 0px !important;
+  padding-left : 20px !important;
+}
+
+.mdl-textfield__label{
+  top: -5px !important;
+  height: 60px !important;
+}
+
+#reservationDetail{
+  padding : 15px !important;
+}
+
+.reservation-wrapper{
+  display: block;
+}
+
+.reservation-box-temp{
+  background: #bbb;
+  color : #fff;
+  font-size: 22px;
+  font-weight: bold;
+  vertical-align: middle;
+  height: 100%;
+  text-align: center;
+  padding-top: 50% !important;
+}
+
+.betch-setting{
+  top: 10px;
+  position: absolute;
+  right: 17px;
+}

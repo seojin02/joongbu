@@ -1,0 +1,311 @@
+<!doctype html>
+<html class="no-js" lang="kr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>LG 화학</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="./lib/images/icon/favicon.ico">
+    <link rel="stylesheet" href="./lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./lib/css/themify-icons.css">
+    <link rel="stylesheet" href="./lib/css/metisMenu.css">
+    <link rel="stylesheet" href="./lib/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="./lib/css/slicknav.min.css">
+    <!-- others css -->
+    <link rel="stylesheet" href="./lib/css/typography.css">
+    <link rel="stylesheet" href="./lib/css/default-css.css?ver=0.5">
+    <link rel="stylesheet" href="./lib/css/styles.css?ver=1.92">
+    <link rel="stylesheet" href="./lib/css/responsive.css">
+    <link rel="stylesheet" href="./lib/lib/HoldOn/HoldOn.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="./lib/css/myLittle.css?ver=1.2">
+    <link href="lib/css/table-responsive.css" rel="stylesheet">
+    <!-- modernizr css -->
+    <script src="./lib/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <!-- jquery latest version -->
+    <script src="./lib/js/vendor/jquery-2.2.4.min.js"></script>
+</head>
+
+<body class="body-bg">
+<!-- preloader area start -->
+<div id="preloader">
+    <div class="loader"></div>
+</div>
+<!-- preloader area end -->
+
+<!-- main wrapper start -->
+<div class="horizontal-main-wrapper">
+    <!-- page title area end -->
+    <div class="main-content-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 mt-4" id="enter_contents">
+
+                </div>
+                <!-- /col-lg-12 -->
+                <div class="col-lg-12 text-center"><h5 id="internal"></h5></div>
+                <div class="col-lg-12 text-center"><h2 id="here"></h5></div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- main content area end -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="ReadUserModal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">RF카드 등록</h5>
+                    <button type="button" style="display:none;" id="suClose" class="close" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body" style="text-align:center;" id="rfBody">
+                </div>
+                <!-- <div class="modal-footer">
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- modal END -->
+
+</div>
+<!-- main wrapper end -->
+<!-- bootstrap 4 js -->
+<script src="./lib/js/popper.min.js"></script>
+<script src="./lib/js/bootstrap.min.js"></script>
+<script src="./lib/js/owl.carousel.min.js"></script>
+<script src="./lib/js/metisMenu.min.js"></script>
+<script src="./lib/js/jquery.slimscroll.min.js"></script>
+<script src="./lib/js/jquery.slicknav.min.js"></script>
+
+<!-- start chart js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
+<!-- others plugins -->
+<script src="./lib/js/plugins.js"></script>
+<script src="./lib/js/scripts.js"></script>
+
+<!-- HoldOn js -->
+<script src="./lib/lib/HoldOn/HoldOn.min.js"></script>
+
+<!-- My js -->
+<script src="./lib/js/pages/RF.js"></script>
+<script>
+  var list = div = button = user = '';
+
+  $(function(){
+    $("#internal").html('네트워크에 연결 중입니다. . .');
+    // var hhhh = new Date();
+    // $("#here").html(getFormatDate(hhhh));
+    try{
+      call_class();
+      window.MyApp.setDeviceInfo("200");
+    }catch(e){
+      window.MyApp.setDeviceInfo("unexpected");
+    }
+  })
+
+  var timer = setInterval(function() { call_class(); }, 10000);
+
+  function getFormatDate(date){
+    var year = date.getFullYear();
+    var month = (1 + date.getMonth());
+    month = month >= 10 ? month : "0" + month;
+    var day = date.getDate();
+    day = day >= 10 ? day : "0" + day;
+    var hour = date.getHours();
+    hour = hour >= 10 ? hour : "0" + hour;
+    var minute = date.getMinutes();
+    minute = minute >= 10 ? minute : "0" + minute;
+    var second = date.getSeconds();
+    second = second >= 10 ? second : "0" + second;
+    return  year + "" + month + "" + day + "" + hour + "" + minute + "" + second;
+  }
+
+
+  function call_class(){
+    $.ajax({
+      // url: ''+urlHead+'/api/attendanceList',
+      url: ''+urlHead+'/api/attendanceList',
+      type: 'GET',
+      data: { type: 'enter' },
+      dataType: 'JSON',
+      success:function(d){
+        try{
+          switch (d["result_code"]){
+              case "200":
+              $("#enter_contents").html(d["contents"]);
+              $("#internal").html('');
+              break;
+
+              case "404":
+              window.MyApp.setDeviceInfo("404");
+              break;
+
+              case "400":
+              window.MyApp.setDeviceInfo("400");
+              break;
+
+              case "403":
+              window.MyApp.setDeviceInfo("403");
+              break;
+            }
+          }catch(e){
+            window.MyApp.setDeviceInfo("unexpected");
+          }
+      },error:function(d){
+        $("#internal").html('통신 오류. 네트워크를 확인하고 재시작 해주세요.');
+        // console.log(d)
+      }
+    });
+  }
+
+  // 체험차 출석
+  function match_person(card, status){
+    if(user != ''){
+      if(status == 1){
+        var timestamp = new Date();
+        timestamp = getFormatDate(timestamp);
+
+        $.ajax({
+          url: ''+urlHead+'/api/attendance',
+          type: 'GET',
+          data: { status: 1, rf_id: card, settop_id: 'ST1001', timestamp: timestamp, user_id: $("#user_id"+user+"").val() , user_name: $("#user"+user+"").val() },
+          dataType: 'JSON',
+          success:function(d){
+            try{
+              switch (d["result_code"]) {
+                case "200":
+
+                $('#rfBody').html('<p>'+$("#user"+user+"").val()+'님, RF카드 인식이 완료되었습니다</p><br><br><h5><strong>'+ $("#dept"+user+"").val() + " " + $("#user"+user+"").val()+'</strong></h5><br><br>');
+
+
+                setTimeout(function(){
+                  $("#div"+user+"").removeAttr('data-target');
+                  $("#div"+user+"").attr("onclick","setUser("+user+", 1)");
+
+                  $("#form"+user+"").attr('class','form-control');
+
+                  $("#btn"+user+"").attr('class','btn btn-rounded btn-success btn-lg cer_person');
+                  $("#btn"+user+"").html('등록완료 ⓧ');
+
+                  $("#rf_id"+user+"").val(card);
+
+                  $("#ReadUserModal").modal('hide');
+
+                }, 2500)
+
+                timer = setInterval(function() { call_class() }, 10000);
+                window.MyApp.setDeviceInfo("200");
+                break;
+
+                case "404":
+                window.MyApp.setDeviceInfo("404");
+                break;
+
+                case "400":
+                window.MyApp.setDeviceInfo("400");
+                break;
+
+                case "403":
+                window.MyApp.setDeviceInfo("403");
+                break;
+
+                case "399":
+                window.MyApp.setDeviceInfo("399");
+                break;
+              }
+            }catch(e){
+              window.MyApp.setDeviceInfo("unexpected");
+            }
+          },error:function(){
+            $("#internal").html('통신 오류. 네트워크를 확인하고 재시작 해주세요.');
+            var strTimer = setTimeout(function(){
+              $("#internal").html('');
+            },10000)
+          }
+        })
+      }
+    }
+  }
+
+  function setUser(idx, st){
+    user = idx;
+
+    // 체험자 출석 취소
+    if(st == 1){
+      var timestamp = new Date();
+      timestamp = getFormatDate(timestamp);
+      $.ajax({
+        url: ''+urlHead+'/api/attendance',
+        type: 'GET',
+        data: { status: 0, rf_id: $("#rf_id"+user+"").val(), settop_id: 'ST1001', timestamp: timestamp, user_id: $("#user_id"+user+"").val(), user_name: $("#user"+user+"").val() },
+        dataType: 'JSON',
+        success:function(d){
+          try{
+            switch (d["result_code"]) {
+              case "200":
+              $("#btn"+user+"").attr('class','btn btn-rounded btn-secondary btn-lg cer_person');
+              $("#btn"+user+"").html('등록전');
+
+              $("#div"+user+"").attr("onclick","setUser("+user+", 0)");
+
+              setTimeout(function(){
+                $("#div"+user+"").attr('data-target', '#ReadUserModal');
+                user = '';
+              }, 10)
+              break;
+
+              case "404":
+              window.MyApp.setDeviceInfo("404");
+              break;
+
+              case "400":
+              window.MyApp.setDeviceInfo("400");
+              break;
+
+              case "403":
+              window.MyApp.setDeviceInfo("403");
+              break;
+            }
+            timer = setInterval(function() { call_class() }, 10000);
+          }catch(e){
+            window.MyApp.setDeviceInfo("unexpected");
+            // console.log(e);
+          }
+        },error:function(d){
+          $("#internal").html('통신 오류. 네트워크를 확인하고 재시작 해주세요.');
+          console.log(d);
+        }
+      })
+
+    // 팝업 실행 (팝업이 띄워져있는 동안 버튼을 주황색 '등록대기'로 유지)
+    }else if(st == 0){
+      clearInterval(timer);
+
+      $("#form"+user+"").attr('class','form-control2');
+      $("#btn"+user+"").attr('class','btn btn-rounded btn-warning btn-lg cer_person');
+      $("#btn"+user+"").html('등록대기');
+
+      $('#rfBody').html('<p>'+$("#user"+user+"").val()+'님, 지급받은 RF카드를 아래 카드리더에 인식해 주세요</p><br><h5><strong>인식 대기 중 ...</strong></h5><br><br><button type="button" id="faClose" class="btn btn-rounded btn-warning btn-md" data-dismiss="modal">취소</button>');
+      // $("#user"+user+"").html()
+
+      // Modal 팝업 종료 (팝업 띄운후 사용자가 수동으로 취소버튼 클릭)
+      $("#faClose").click(function(){
+        timer = setInterval(function() { call_class() }, 10000);
+        $("#form"+user+"").attr('class','form-control');
+        $("#btn"+user+"").attr('class','btn btn-rounded btn-secondary btn-lg cer_person');
+        $("#btn"+user+"").html('등록 전');
+        user = '';
+        window.MyApp.setDeviceInfo("200");
+      })
+    }
+  }
+
+  </script>
+</body>
+
+</html>
